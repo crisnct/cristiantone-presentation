@@ -1,0 +1,418 @@
+<!-- Chosen Palette: Custom Vibrant (Navy, Blue, Green, Yellow, Red) -->
+<!-- Application Structure Plan: The SPA is structured as a narrative journey, starting with a high-level summary ('Career at a Glance'), followed by a deep dive into skills ('Core Competencies' & 'Technical Proficiency'), then a chronological 'Career Timeline'. It then segments experience by 'Domain Experience' and concludes with the 'Transition to UX/UI Design'. This structure was chosen to tell a compelling story of career evolution, moving from broad strokes to specific details, and ending with a future-facing perspective, which is more engaging for a recruiter than a simple CV layout. -->
+<!-- Visualization & Content Choices: 
+- Career Summary -> Goal: Inform -> Viz: "Big Number" Stats (HTML/CSS) -> Justification: Immediate, high-impact overview.
+- Competencies -> Goal: Compare -> Viz: Radar Chart (Chart.js) -> Justification: Shows a balanced, multi-faceted skill profile.
+- Technical Skills -> Goal: Compare -> Viz: Horizontal Bar Chart (Chart.js) -> Justification: Clearly compares years of experience across different technologies.
+- Career History -> Goal: Change -> Viz: Vertical Timeline (HTML/CSS) -> Justification: Most intuitive way to show chronological progression. NO SVG/Mermaid.
+- Application Focus -> Goal: Composition -> Viz: Donut Chart (Chart.js) -> Justification: Shows part-to-whole relationship of experience types.
+- Industry Exposure -> Goal: Composition -> Viz: Pie Chart (Chart.js) -> Justification: Effectively shows proportional experience in different sectors.
+- UX Skills -> Goal: Organize -> Viz: Styled Cards (HTML/CSS + Unicode) -> Justification: Breaks down new skills into clear, visual groups.
+- LLM Feature -> Goal: Explore/Inform -> Viz: Interactive Q&A (HTML/CSS + Gemini API) -> Justification: Allows users to ask specific questions about the career profile, enhancing engagement and information retrieval based on the provided data.
+-->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Tone - Career Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 500px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .material-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 2px solid #118AB2;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.5rem;
+            top: 0.25rem;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 9999px;
+            background-color: #FF6B6B;
+            border: 2px solid white;
+        }
+        .stat-card {
+            background-color: #073B4C;
+            color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden by default */
+            margin: 1rem auto;
+        }
+
+		/* Style for the iframe to hide its scrollbars */
+        .no-scrollbar-iframe {
+            width: 100%;
+            height: 400px; /* Set a fixed height or adjust dynamically */
+            border: none;
+            overflow: hidden; /* This is the key property */
+        }
+		
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+		
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-extrabold text-[#073B4C] mb-2">Cristian Tone</h1>
+            <p class="text-xl text-[#118AB2]">A Career in Technology: Backend Development and UX Design</p>
+        </header>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">Career at a Glance</h2>
+            <p class="text-center max-w-3xl mx-auto text-gray-700 mb-8">This section provides a high-level overview of a career defined by extensive experience, consistent leadership, and exposure to multiple key industries, setting the stage for a deeper dive into specific skills and roles.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="stat-card">
+                    <p class="text-6xl font-black text-[#06D6A0]">18+</p>
+                    <p class="text-lg mt-2">Years of Professional Experience</p>
+                </div>
+                <div class="stat-card">
+                    <p class="text-6xl font-black text-[#FFD166]">5+</p>
+                    <p class="text-lg mt-2">Years of Leadership Experience</p>
+                </div>
+                <div class="stat-card">
+                    <p class="text-6xl font-black text-[#FF6B6B]">4</p>
+                    <p class="text-lg mt-2">Key Industries Served</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">Skills Profile</h2>
+            <p class="text-center max-w-3xl mx-auto text-gray-700 mb-8">The following visualizations compare core professional competencies with deep technical expertise. The radar chart illustrates a balanced profile of soft skills crucial for leadership, while the bar chart quantifies the extensive years of hands-on technical experience.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="material-card border-10">
+                    <h3 class="text-2xl font-bold text-center mb-4 text-[#073B4C]">Core Competencies</h3>
+                    <div class="chart-container h-90 md:h-96 border-10 rounded-lg">
+                        <canvas id="softSkillsChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">A balanced profile of leadership, technical communication, and strategic problem-solving developed over years of experience.</p>
+                </div>
+                <div class="material-card">
+                    <h3 class="text-2xl font-bold text-center mb-4 text-[#073B4C]">Technical Proficiency</h3>
+                     <div class="chart-container h-80 md:h-96">
+                        <canvas id="techSkillsChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">Extensive, long-term expertise in core development technologies, frameworks, and version control systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">Career Timeline</h2>
+            <p class="text-center max-w-3xl mx-auto text-gray-700 mb-8">This timeline showcases a chronological journey of professional growth, highlighting key roles and responsibilities at each stage, from initial game development to leading teams in complex enterprise environments.</p>
+            <div class="material-card">
+                <div class="relative">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-[#118AB2]">2021 - 2024</p>
+                        <h4 class="font-bold text-lg">Lead Developer | NTT DATA</h4>
+                        <p class="text-gray-700">Led a team of six, enhancing productivity for an automotive client by focusing on optimized workflows and improved user experience for internal tools.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-[#118AB2]">2020 - 2021</p>
+                        <h4 class="font-bold text-lg">Lead Developer | P4B</h4>
+                        <p class="text-gray-700">Contributed to backend development for a German healthcare application, streamlining medical prescription approvals.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-[#118AB2]">2018 - 2019</p>
+                        <h4 class="font-bold text-lg">Senior Java Developer | Synopsis</h4>
+                        <p class="text-gray-700">Developed high-performance graphical editors and viewers for automotive testing data, significantly increasing user satisfaction.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-[#118AB2]">2007 - 2018</p>
+                        <h4 class="font-bold text-lg">Java Developer / Lead | Konecranes</h4>
+                        <p class="text-gray-700">Developed and led projects for container terminal logistics, including a graphical editor tool that was instrumental in securing new contracts.</p>
+                    </div>
+                     <div class="timeline-item pb-0 border-l-transparent">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-[#118AB2]">2006 - 2007</p>
+                        <h4 class="font-bold text-lg">C++ Developer | FUNLABS (Activision)</h4>
+                        <p class="text-gray-700">Began career implementing special effects for major 3D game titles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">Domain Experience</h2>
+            <p class="text-center max-w-3xl mx-auto text-gray-700 mb-8">Experience is not just about time, but also about the breadth of application. The charts below break down the career focus between application types and the diverse industries served, illustrating a versatile and adaptable skillset.</p>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div class="material-card">
+                    <h3 class="text-2xl font-bold text-center mb-4 text-[#073B4C]">Application Focus</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="appTypeChart"></canvas>
+                    </div>
+                     <p class="text-center text-gray-600 mt-4">A deep specialization in complex desktop applications, complemented by significant experience in building robust web application backends.</p>
+                </div>
+                <div class="material-card">
+                    <h3 class="text-2xl font-bold text-center mb-4 text-[#073B4C]">Industry Exposure</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="industryChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">Diverse experience across several technically demanding sectors, from logistics and automotive to gaming and healthcare.</p>
+                </div>
+             </div>
+        </section>
+        
+        <section class="mb-16">
+             <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">UX/UI Design</h2>
+             <p class="text-center max-w-3xl mx-auto text-gray-700 mb-8">This final section highlights the ongoing career evolution. It showcases the new skills being acquired in user experience design, demonstrating a commitment to leveraging a deep technical background to create intuitive, user-centered products.</p>
+             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                 <div class="material-card text-center transition transform hover:scale-105">
+                     <p class="text-4xl mb-3">🔎</p>
+                     <h4 class="font-bold text-lg text-[#073B4C]">User Research</h4>
+                     <p class="text-gray-600">Conducting interviews and competitive audits to inform design decisions.</p>
+                 </div>
+                 <div class="material-card text-center transition transform hover:scale-105">
+                     <p class="text-4xl mb-3">🎨</p>
+                     <h4 class="font-bold text-lg text-[#073B4C]">Visual Design</h4>
+                     <p class="text-gray-600">Selecting typography and colors with a focus on accessibility and brand identity.</p>
+                 </div>
+                 <div class="material-card text-center transition transform hover:scale-105">
+                     <p class="text-4xl mb-3">📱</p>
+                     <h4 class="font-bold text-lg text-[#073B4C]">Prototyping</h4>
+                     <p class="text-gray-600">Creating wireframes, mockups, and interactive prototypes in Figma.</p>
+                 </div>
+             </div>
+        </section>
+
+       
+
+    </div>
+
+    <script>
+        const tooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        const wrapLabel = (label) => {
+            if (typeof label !== 'string' || label.length <= 16) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16 && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const colors = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            navy: '#073B4C'
+        };
+        
+        const chartFont = {
+            family: 'Inter',
+            size: 12,
+            color: '#4A5568'
+        };
+
+        const softSkillsCtx = document.getElementById('softSkillsChart').getContext('2d');
+        new Chart(softSkillsCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Leadership', 'Communication', 'Problem-Solving', 'Organization & Prioritization', 'Responsibility & Trustworthiness'].map(wrapLabel),
+                datasets: [{
+                    label: 'Core Competencies',
+                    data: [9, 8, 9, 8, 9],
+                    backgroundColor: 'rgba(17, 138, 178, 0.2)',
+                    borderColor: colors.blue,
+                    pointBackgroundColor: colors.blue,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: colors.blue,
+					borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: {
+							font: chartFont,
+							padding: 15 
+						},
+                        ticks: {
+                           display: false,
+                           stepSize: 2,
+						   padding: 15
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 10
+                    }
+                },
+                plugins: {
+                    ...tooltipCallback.plugins,
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        
+        const techSkillsCtx = document.getElementById('techSkillsChart').getContext('2d');
+        new Chart(techSkillsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Java Ecosystem', 'SWT & Eclipse RCP', 'Build Tools (Ant & Maven)', 'Version Control (Git & CVS)', 'Spring Boot & JPA'].map(wrapLabel),
+                datasets: [{
+                    label: 'Years of Experience',
+                    data: [15, 15, 10, 10, 5],
+                    backgroundColor: [colors.blue, colors.green, colors.yellow, colors.red, colors.navy],
+                    borderColor: 'rgba(255, 255, 255, 0)',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: chartFont },
+                        beginAtZero: true
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { font: chartFont, padding: 10 }
+                    }
+                },
+                plugins: {
+                    ...tooltipCallback.plugins,
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        const appTypeCtx = document.getElementById('appTypeChart').getContext('2d');
+        new Chart(appTypeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Desktop Applications', 'Web Backends'],
+                datasets: [{
+                    data: [80, 20],
+                    backgroundColor: [colors.blue, colors.green],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...tooltipCallback.plugins,
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: chartFont }
+                    }
+                }
+            }
+        });
+
+        const industryCtx = document.getElementById('industryChart').getContext('2d');
+        new Chart(industryCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Logistics', 'Automotive', 'Healthcare', 'Gaming'],
+                datasets: [{
+                    data: [45, 30, 10, 15],
+                    backgroundColor: [colors.blue, colors.green, colors.yellow, colors.red],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...tooltipCallback.plugins,
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: chartFont }
+                    }
+                }
+            }
+        });
+      
+    </script>
+</body>
+</html>
