@@ -296,7 +296,7 @@
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: colors.blue,
-      borderWidth: 1
+                borderWidth: 1
             }]
         },
         options: {
@@ -304,19 +304,23 @@
             maintainAspectRatio: false,
             scales: {
                 r: {
-                    angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
-                    grid: { color: 'rgba(0, 0, 0, 0.1)' },
-                    pointLabels: {
-          font: chartFont,
-          padding: 15
-        },
-                    ticks: {
-                       display: false,
-                       stepSize: 2,
-           padding: 15
+                angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                pointLabels: {
+                    font: chartFont,
+                    font: {
+                        family: 'Inter',
+                        size: 12 // Reduce font size for smaller charts
                     },
-                    suggestedMin: 0,
-                    suggestedMax: 10
+                    padding: -90
+                },
+                ticks: {
+                   display: false,
+                   stepSize: 1,
+                   padding: 0
+                },
+                suggestedMin: 2,
+                suggestedMax: 15
                 }
             },
             plugins: {
@@ -373,7 +377,7 @@
             datasets: [{
                 data: [80, 20],
                 backgroundColor: [colors.blue, colors.green],
-                hoverOffset: 4
+                hoverOffset: 30
             }]
         },
         options: {
@@ -397,7 +401,7 @@
             datasets: [{
                 data: [45, 30, 10, 15],
                 backgroundColor: [colors.blue, colors.green, colors.yellow, colors.red],
-                hoverOffset: 4
+                hoverOffset: 30
             }]
         },
         options: {
@@ -407,7 +411,12 @@
                 ...tooltipCallback.plugins,
                 legend: {
                     position: 'bottom',
-                    labels: { font: chartFont }
+                    labels: {
+                        font: chartFont,
+                        maxWidth: 100,
+                        textAlign: 'center',
+                        padding: 10
+                    }
                 }
             }
         }
