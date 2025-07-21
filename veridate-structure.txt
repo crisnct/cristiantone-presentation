@@ -1,0 +1,39 @@
+VeriDate
+Location-based and AI-powered dating app for real, verified connections—no fakes, no ghosting. Smart matching finds your perfect match, while AI-enhanced photos reflect your true essence. Authentic dating, made effortless.
+
+The problem:
+Many users of dating apps are complaining about not finding the right people, with whom they can have a meaningful connection.
+
+The goal:
+Our dating app will help single individuals seeking a relationship to find the right people with whom they can have a meaningful and genuine connection. We will measure effectiveness by the number of first-time in-person meetings between two matches.
+
+1. Empathize
+   - Conduct surveys and interviews with potential users to understand their needs and pain points.
+   - Create emphathy maps to visualize user emotions and experiences.
+   - Create user personas based on research findings to guide app development.
+   - Create user stories to define user needs and desired features.
+   - Create user journey maps to visualize the user experience and identify key touchpoints.
+
+2. Define user problems - problem statements, hypothesis statements and value propositions
+
+3. Ideate
+    - Brainstorm features and functionalities that address user needs and pain points.
+    - Create competitor analysis to understand the strengths and weaknesses of existing dating apps.
+    - Create information architecture to define the app's structure and navigation.
+    - Create paper wireframes to visualize the app's layout and functionality.
+
+4. Prototype
+    - Create low-fidelity prototypes using Figma to create basic app screens.
+    - Conduct usability testing with potential users to gather feedback on the prototype.
+    - Create high-fidelity prototypes using Figma to create basic app screens.
+    - Conduct usability testing with potential users to gather feedback on the prototype.
+    - Conduct usability testing with potential users to gather feedback on the prototype.
+
+5. Accessibility
+
+
+Orders for AI:
+
+Create a carousel with fake images after "Create user personas based on research findings to guide app development."
+
+
