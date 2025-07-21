@@ -199,7 +199,7 @@
           <!-- New Carousel for Empathy Maps -->
           <div class="carousel-container" id="carousel-empathy-maps">
             <div class="carousel-images-wrapper">
-              <div class="carousel-image-slide"><img src="https://placehold.co/600x300/FFD166/black?text=Empathy+Map+1" alt="Empathy Map Image 1"></div>
+              <div class="carousel-image-slide"><img id="veridate-empathy-map-ml.jpg" src="" alt="Empathy Map Image 1"></div>
               <div class="carousel-image-slide"><img src="https://placehold.co/600x300/06D6A0/black?text=Empathy+Map+2" alt="Empathy Map Image 2"></div>
               <div class="carousel-image-slide"><img src="https://placehold.co/600x300/118AB2/black?text=Empathy+Map+3" alt="Empathy Map Image 3"></div>
             </div>
@@ -317,7 +317,17 @@
 </div>
 
 <script>
+  const GITHUB_IMG_BASE_URL = "https://raw.githubusercontent.com/crisnct/cristiantone-presentation/main/static/images/";
+
   document.addEventListener('DOMContentLoaded', () => {
+    function updateImageSrc(imageFilename){
+      const image = document.getElementById(imageFilename);
+      if (image) {
+        // Use the constant with a template literal to form the full URL
+        image.src = `${GITHUB_IMG_BASE_URL}${imageFilename}`;
+      }
+    }
+
     // Function to initialize a single carousel
     function initializeCarousel(carouselId) {
       const carouselContainer = document.getElementById(carouselId);
@@ -378,6 +388,11 @@
     initializeCarousel('carousel-ideate');
     initializeCarousel('carousel-prototype');
     initializeCarousel('carousel-accessibility');
+
+    updateImageSrc('veridate-empathy-map-ml.jpg');
+    updateImageSrc('veridate-empathy-map-am.jpg');
+    updateImageSrc('veridate-empathy-map-adelina.jpg');
+
   });
 </script>
 
