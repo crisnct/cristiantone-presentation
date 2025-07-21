@@ -22,8 +22,8 @@
         background-color: white;
         border-radius: 0.75rem;
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.06);
-        padding: 1.5rem; /* Base padding */
-        margin-bottom: 2rem; /* Consistent bottom margin */
+        padding: 0.5rem; /* Base padding */
+        margin-bottom: 0rem; /* Consistent bottom margin */
     }
     /* Specific styles for headings to match the snowswt.html palette */
     h1 {
@@ -78,13 +78,13 @@
     .carousel-container {
         position: relative;
         width: 100%;
-        max-width: 700px; /* Adjust max-width as needed */
+        max-width: 1000px; /* Adjust max-width as needed */
         margin: 1.5rem auto; /* Center carousel and add vertical space */
         overflow: hidden;
         border-radius: 0.5rem;
         box-shadow: 0 2px 4px -1px rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.06);
         background-color: #f8fafc; /* Light background for carousel */
-        height: 300px; /* Fixed height for consistency */
+        height: 500;
     }
     .carousel-images-wrapper {
         display: flex;
@@ -110,7 +110,7 @@
         transform: translateY(-50%);
         background-color: rgba(0, 0, 0, 0.5);
         color: white;
-        padding: 0.75rem 0.5rem;
+        padding: 1rem 1rem;
         border-radius: 0.5rem;
         cursor: pointer;
         z-index: 10;
@@ -152,7 +152,7 @@
 </head>
 <body>
 
-<div class="max-w-4xl mx-auto my-8 material-card px-4 md:px-8 py-8">
+<div class="w-full px-4 md:px-8 py-8">
   <header class="text-center mb-8 bg-[#073B4C] text-white py-8 rounded-t-lg -mx-4 md:-mx-8 -mt-8">
     <h1 class="text-4xl md:text-5xl font-extrabold mb-2">VeriDate</h1>
     <p class="text-xl md:text-2xl text-[#06D6A0] mb-4">Location-based and AI-powered dating app for real, verified connections—no fakes, no ghosting. Smart matching finds your perfect match, while AI-enhanced photos reflect their true essence. Authentic dating, made effortless.</p>
@@ -200,26 +200,42 @@
           <div class="carousel-container" id="carousel-empathy-maps">
             <div class="carousel-images-wrapper">
               <div class="carousel-image-slide"><img id="veridate-empathy-map-ml.jpg" src="" alt="Empathy Map Image 1"></div>
-              <div class="carousel-image-slide"><img src="https://placehold.co/600x300/06D6A0/black?text=Empathy+Map+2" alt="Empathy Map Image 2"></div>
-              <div class="carousel-image-slide"><img src="https://placehold.co/600x300/118AB2/black?text=Empathy+Map+3" alt="Empathy Map Image 3"></div>
+              <div class="carousel-image-slide"><img id="veridate-empathy-map-am.jpg" src="" alt="Empathy Map Image 2"></div>
+              <div class="carousel-image-slide"><img id="veridate-empathy-map-adelina.jpg" src="" alt="Empathy Map Image 3"></div>
             </div>
             <button class="carousel-button prev">❮</button>
             <button class="carousel-button next">❯</button>
             <div class="carousel-dots"></div>
           </div>
+
+          <li>Create user personas based on research findings to guide app development.</li>
+          <!-- New Carousel for Personas -->
+          <div class="carousel-container" id="carousel-personas">
+            <div class="carousel-images-wrapper">
+              <div class="carousel-image-slide"><img id="veridate-lars-persona-details.jpg" src="" alt="Persona 1"></div>
+              <div class="carousel-image-slide"><img id="veridate-catalin-persona-details.jpg" src="" alt="Persona 2"></div>
+              <div class="carousel-image-slide"><img id="veridate-antonia-persona-details.jpg" src="" alt="Persona 3"></div>
+            </div>
+            <button class="carousel-button prev">❮</button>
+            <button class="carousel-button next">❯</button>
+            <div class="carousel-dots"></div>
+          </div>
+
           <li>Determine the pain points.</li>
           <div class="carousel-container" id="carousel-pain-points">
             <div class="carousel-images-wrapper">
-              <div class="carousel-image-slide"><img src="https://placehold.co/600x300/FFD166/black?text=Pain+Points+1" alt="Paint points page 1"></div>
-              <div class="carousel-image-slide"><img src="https://placehold.co/600x300/06D6A0/black?text=Pain+Points+2" alt="Paint points page 2"></div>
-              <div class="carousel-image-slide"><img src="https://placehold.co/600x300/118AB2/black?text=Pain+Points+3" alt="Paint points page 3"></div>
+              <div class="carousel-image-slide"><img id="veridate-pain-points-1.jpg" src="" alt="Paint points page 1"></div>
+              <div class="carousel-image-slide"><img id="veridate-pain-points-2.jpg" src="" alt="Paint points page 2"></div>
+              <div class="carousel-image-slide"><img id="veridate-pain-points-3.jpg" src="" alt="Paint points page 3"></div>
+              <div class="carousel-image-slide"><img id="veridate-pain-points-4.jpg" src="" alt="Paint points page 4"></div>
             </div>
             <button class="carousel-button prev">❮</button>
             <button class="carousel-button next">❯</button>
             <div class="carousel-dots"></div>
           </div>
-          <li>Create user stories to define user needs and desired features.</li>
           <li>Create user journey maps to visualize the user experience and identify key touchpoints.</li>
+          <li>Create user stories to define user needs and desired features.</li>
+
         </ul>
         <!-- Original Carousel for Empathize -->
         <div class="carousel-container" id="carousel-empathize">
@@ -384,6 +400,7 @@
     initializeCarousel('carousel-empathize');
     initializeCarousel('carousel-empathy-maps'); // Initialize the new carousel
     initializeCarousel('carousel-pain-points');
+    initializeCarousel('carousel-personas');
     initializeCarousel('carousel-define');
     initializeCarousel('carousel-ideate');
     initializeCarousel('carousel-prototype');
@@ -392,6 +409,13 @@
     updateImageSrc('veridate-empathy-map-ml.jpg');
     updateImageSrc('veridate-empathy-map-am.jpg');
     updateImageSrc('veridate-empathy-map-adelina.jpg');
+    updateImageSrc('veridate-antonia-persona-details.jpg');
+    updateImageSrc('veridate-catalin-persona-details.jpg');
+    updateImageSrc('veridate-lars-persona-details.jpg');
+    updateImageSrc('veridate-pain-points-1.jpg');
+    updateImageSrc('veridate-pain-points-2.jpg');
+    updateImageSrc('veridate-pain-points-3.jpg');
+    updateImageSrc('veridate-pain-points-4.jpg');
 
   });
 </script>
