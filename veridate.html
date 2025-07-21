@@ -233,7 +233,20 @@
             <button class="carousel-button next">❯</button>
             <div class="carousel-dots"></div>
           </div>
+
           <li>Create user journey maps to visualize the user experience and identify key touchpoints.</li>
+          <!-- New Carousel for User Journeys -->
+          <div class="carousel-container" id="carousel-user-journeys">
+            <div class="carousel-images-wrapper">
+              <div class="carousel-image-slide"><img id="veridate-user-journey-map-lars.jpg" src="" alt="User Journey 1"></div>
+              <div class="carousel-image-slide"><img id="veridate-user-journey-map-catalin.jpg" src="" alt="User Journey 2"></div>
+              <div class="carousel-image-slide"><img id="veridate-user-journey-map-antonia.jpg" src="" alt="User Journey 3"></div>
+            </div>
+            <button class="carousel-button prev">❮</button>
+            <button class="carousel-button next">❯</button>
+            <div class="carousel-dots"></div>
+          </div>
+
           <li>Create user stories to define user needs and desired features.</li>
 
         </ul>
@@ -401,6 +414,7 @@
     initializeCarousel('carousel-empathy-maps'); // Initialize the new carousel
     initializeCarousel('carousel-pain-points');
     initializeCarousel('carousel-personas');
+    initializeCarousel('carousel-user-journeys');
     initializeCarousel('carousel-define');
     initializeCarousel('carousel-ideate');
     initializeCarousel('carousel-prototype');
@@ -416,6 +430,9 @@
     updateImageSrc('veridate-pain-points-2.jpg');
     updateImageSrc('veridate-pain-points-3.jpg');
     updateImageSrc('veridate-pain-points-4.jpg');
+    updateImageSrc('veridate-user-journey-map-antonia.jpg');
+    updateImageSrc('veridate-user-journey-map-catalin.jpg');
+    updateImageSrc('veridate-user-journey-map-lars.jpg');
 
   });
 </script>
