@@ -34,14 +34,14 @@
     }
     h2 {
         color: #073B4C; /* Dark navy for main section headings */
-        font-size: 1.5rem; /* text-2xl */
+        font-size: 2.5rem; /* text-2xl */
         font-weight: 700; /* font-bold */
         margin-top: 2rem;
         margin-bottom: 1rem;
     }
     h3 {
         color: #118AB2; /* Blue for sub-headings */
-        font-size: 1.25rem; /* text-xl */
+        font-size: 2.25rem; /* text-xl */
         font-weight: 600; /* font-semibold */
         margin-top: 1.5rem;
         margin-bottom: 0.75rem;
@@ -159,22 +159,22 @@
   </header>
 
   <section class="mb-8 mt-8">
-    <h2 class="text-2xl font-bold text-[#073B4C]">The Problem:</h2>
+    <h2 class="text-3xl font-bold text-[#073B4C]">The Problem:</h2>
     <p>Many users of dating apps are complaining about not finding the right people, with whom they can have a meaningful connection.</p>
   </section>
 
   <section class="mb-8">
-    <h2 class="text-2xl font-bold text-[#073B4C]">The Goal:</h2>
+    <h2 class="text-3xl font-bold text-[#073B4C]">The Goal:</h2>
     <p>Our dating app will help single individuals seeking a relationship to find the right people with whom they can have a meaningful and genuine connection. We will measure effectiveness by the number of first-time in-person meetings between two matches.</p>
   </section>
 
   <section class="mb-8">
-    <h2 class="text-2xl font-bold text-[#073B4C]">UX Design Process:</h2>
+    <h2 class="text-3xl font-bold text-[#073B4C]">UX Design Process:</h2>
 
     <!-- Changed from <ol> to <div> and added ux-process-step class for spacing -->
     <div class="space-y-4">
       <div class="ux-process-step">
-        <h3 class="font-semibold text-lg text-[#118AB2]">Empathize</h3>
+        <h3 class="font-bold  text-2xl text-[#118AB2]">Empathize</h3>
         <ul class="list-disc list-inside ml-6 space-y-2">
           <li>Conduct surveys and interviews with potential users to understand their needs and pain points.</li>
           <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-center items-center gap-6">
@@ -246,25 +246,11 @@
             <button class="carousel-button next">❯</button>
             <div class="carousel-dots"></div>
           </div>
-
-          <li>Create user stories to define user needs and desired features.</li>
-
         </ul>
-        <!-- Original Carousel for Empathize -->
-        <div class="carousel-container" id="carousel-empathize">
-          <div class="carousel-images-wrapper">
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/FF6B6B/white?text=Empathize+1" alt="Empathize Image 1"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/FFD166/white?text=Empathize+2" alt="Empathize Image 2"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/06D6A0/white?text=Empathize+3" alt="Empathize Image 3"></div>
-          </div>
-          <button class="carousel-button prev">❮</button>
-          <button class="carousel-button next">❯</button>
-          <div class="carousel-dots"></div>
-        </div>
       </div>
 
       <div class="ux-process-step">
-        <h3 class="font-semibold text-lg text-[#118AB2]">Define User Problems</h3>
+        <h3 class="font-bold text-2xl text-[#118AB2]">Define User Problems</h3>
         <ul class="list-disc list-inside ml-6 space-y-2">
           <li><strong>Problem Statements:</strong> Articulate specific user pain points into clear, actionable problems.</li>
           <li><strong>Hypothesis Statements:</strong> Formulate testable assumptions about potential solutions to user problems.</li>
@@ -273,9 +259,13 @@
         <!-- Carousel for Define -->
         <div class="carousel-container" id="carousel-define">
           <div class="carousel-images-wrapper">
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/118AB2/white?text=Define+1" alt="Define Image 1"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/073B4C/white?text=Define+2" alt="Define Image 2"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/FF6B6B/white?text=Define+3" alt="Define Image 3"></div>
+            <div class="carousel-image-slide"><img id="veridate-problem-statements-1.jpg" src="" alt="Problem statements 1"></div>
+            <div class="carousel-image-slide"><img id="veridate-problem-statements-2.jpg" src="" alt="Problem statements 2"></div>
+            <div class="carousel-image-slide"><img id="veridate-problem-statements-3.jpg" src="" alt="Problem statements 3"></div>
+            <div class="carousel-image-slide"><img id="veridate-hypothesis-statements-1.jpg" src="" alt="Hypothesis statements 1"></div>
+            <div class="carousel-image-slide"><img id="veridate-hypothesis-statements-2.jpg" src="" alt="Hypothesis statements 2"></div>
+            <div class="carousel-image-slide"><img id="veridate-hypothesis-statements-3.jpg" src="" alt="Hypothesis statements 3"></div>
+            <div class="carousel-image-slide"><img id="veridate-value-propositions.jpg" src="" alt="Value propositions"></div>
           </div>
           <button class="carousel-button prev">❮</button>
           <button class="carousel-button next">❯</button>
@@ -284,63 +274,88 @@
       </div>
 
       <div class="ux-process-step">
-        <h3 class="font-semibold text-lg text-[#118AB2]">Ideate</h3>
+        <h3 class="font-bold text-2xl text-[#118AB2]">Ideate</h3>
         <ul class="list-disc list-inside ml-6 space-y-2">
-          <li>Brainstorm features and functionalities that address user needs and pain points.</li>
-          <li>Create competitor analysis to understand the strengths and weaknesses of existing dating apps.</li>
+          <li>Competitive Audit: create competitor analysis to understand the strengths and weaknesses of existing dating apps.</li>
+          <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-center items-center gap-6">
+            <a href="https://docs.google.com/spreadsheets/d/1gLAhTd6pnaEkGKV55ceLX1D1e5JmcIWaPmlQ9xjPSU0/edit?usp=sharing" target="_blank" class="bg-[#118AB2] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#073B4C] transition-colors duration-300 flex items-center space-x-2">
+              <span>Competitive Audit Research</span>
+            </a>
+            <a href="https://docs.google.com/document/d/1GFV3dIe6e0W4AZaLHE_iCSW1_442SpvvMSNQSngHfuw/edit?usp=sharing" target="_blank" class="bg-[#06D6A0] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#073B4C] transition-colors duration-300 flex items-center space-x-2">
+              <span>Competitive Audit Report</span>
+            </a>
+          </div>
+
           <li>Create information architecture to define the app's structure and navigation.</li>
+          <img id="veridate-information-architecture.png" src="" alt="VeriDate Information Architecture" class="w-full h-auto object-cover rounded-lg">
+
           <li>Create paper wireframes to visualize the app's layout and functionality.</li>
-        </ul>
-        <!-- Carousel for Ideate -->
-        <div class="carousel-container" id="carousel-ideate">
-          <div class="carousel-images-wrapper">
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/FFD166/black?text=Ideate+1" alt="Ideate Image 1"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/06D6A0/black?text=Ideate+2" alt="Ideate Image 2"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/118AB2/black?text=Ideate+3" alt="Ideate Image 3"></div>
+          <!-- Carousel for Ideate -->
+          <div class="carousel-container" id="carousel-ideate">
+            <div class="carousel-images-wrapper">
+              <div class="carousel-image-slide"><img id="veridate-paper-wireframe-1.jpg" src="" alt="Ideate Image 1"></div>
+              <div class="carousel-image-slide"><img id="veridate-paper-wireframe-2.jpg" src="" alt="Ideate Image 2"></div>
+            </div>
+            <button class="carousel-button prev">❮</button>
+            <button class="carousel-button next">❯</button>
+            <div class="carousel-dots"></div>
           </div>
-          <button class="carousel-button prev">❮</button>
-          <button class="carousel-button next">❯</button>
-          <div class="carousel-dots"></div>
-        </div>
+        </ul>
       </div>
 
       <div class="ux-process-step">
-        <h3 class="font-semibold text-lg text-[#118AB2]">Prototype</h3>
+        <h3 class="font-bold text-2xl text-[#118AB2]">Prototype</h3>
         <ul class="list-disc list-inside ml-6 space-y-2">
-          <li>Create <a href="#" target="_blank">low-fidelity prototypes</a> using Figma to create basic app screens.</li>
-          <li>Conduct <a href="#" target="_blank">usability testing</a> with potential users to gather feedback on the prototype.</li>
-          <li>Create <a href="#" target="_blank">high-fidelity prototypes</a> using Figma to create basic app screens.</li>
-          <li>Conduct <a href="#" target="_blank">usability testing</a> with potential users to gather feedback on the prototype.</li>
-          <li>Conduct <a href="#" target="_blank">usability testing</a> with potential users to gather feedback on the prototype.</li>
-        </ul>
-        <!-- Carousel for Prototype -->
-        <div class="carousel-container" id="carousel-prototype">
-          <div class="carousel-images-wrapper">
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/073B4C/white?text=Prototype+1" alt="Prototype Image 1"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/FF6B6B/white?text=Prototype+2" alt="Prototype Image 2"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/FFD166/white?text=Prototype+3" alt="Prototype Image 3"></div>
+          <li>Create <a href="https://www.figma.com/proto/VHWXuZSkvfZ4tJ57mhMJsY/VeriDate?node-id=242-2&p=f&t=t2wXgxrWUWUDHWG6-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=242%3A2" target="_blank">low-fidelity prototype</a> using Figma.</li>
+          <li>Plan a <a href="https://docs.google.com/document/d/1JiIFe1ohpgyxA1WkPeaO3HNlxVtuVFikn3I0LOM0QhA" target="_blank"> usability study </a> with the same users to gather feedback on the prototype.</li>
+          <li>Create a <a href="https://forms.gle/dbpCmfxsxZiNmk1s6" target="_blank">survey</a></li>
+          <li>Create affinity diagram to organize user feedback and insights.
+            <img id="veridate-affinity-diagram-1.png" src="" alt="Affinity diagram 1" class="w-full h-auto object-cover rounded-lg">
+          </li>
+
+          <li>Update <a href="https://www.figma.com/proto/VHWXuZSkvfZ4tJ57mhMJsY/VeriDate?node-id=531-676&p=f&t=6KJy8laxK3GBvXVl-1&scaling=scale-down&content-scaling=fixed&page-id=531%3A5&starting-point-node-id=531%3A676" target="_blank">low-fidelity prototype</a></li>
+          <li>Create a new <a href="https://docs.google.com/forms/d/e/1FAIpQLSds2a15_yYrWJvFc2bQpJ96KBZj4nIQLUCzg7dkxkGLEm0ZPg/viewform" target="_blank">survey</a></li>
+          <li>Create affinity diagram to organize user feedback and insights.
+            <img id="veridate-affinity-diagram-2.png" src="" alt="Affinity diagram 2" class="w-full h-auto object-cover rounded-lg">
+          </li>
+
+          <li>Create <a href="https://www.figma.com/proto/VHWXuZSkvfZ4tJ57mhMJsY/VeriDate?node-id=843-857&p=f&t=YtDvlvNXXtKlcSnC-1&scaling=scale-down&content-scaling=fixed&page-id=843%3A499&starting-point-node-id=843%3A857" target="_blank">high-fidelity prototype</a> using Figma.</li>
+          <li>Plan a <a href="https://docs.google.com/document/d/1fmLGYYZZj7zqGDnaT9FLkac6PlcMOsM9pEpFbTRrXFE/edit?usp=sharing" target="_blank"> usability study </a> with the same users to gather feedback on the prototype.</li>
+          <li>Create a <a href="https://forms.gle/JKRTTq3mZWzkFLW6A" target="_blank">survey</a></li>
+          <li>Create affinity diagram to organize user feedback and insights.
+            <img id="veridate-affinity-diagram-3.png" src="" alt="Affinity diagram 3" class="w-full h-auto object-cover rounded-lg">
+          </li>
+
+          <li>Update <a href="https://www.figma.com/proto/VHWXuZSkvfZ4tJ57mhMJsY/VeriDate?node-id=1246-824&p=f&t=yG8MXCJ0WmwNpkS8-1&scaling=scale-down&content-scaling=fixed&page-id=1246%3A516&starting-point-node-id=1246%3A824" target="_blank">high-fidelity prototype</a></li>
+
+          <li>Compare the first and second versions of the high-fidelity prototype to highlight improvements and changes based on user feedback.</li>
+          <!-- Carousel for comparison between first and second version of high-fi prototype -->
+          <div class="carousel-container" id="carousel-high-fi-comparison">
+            <div class="carousel-images-wrapper">
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-1.jpg" src="" alt="Comparison Image 1"></div>
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-2.jpg" src="" alt="Comparison Image 2"></div>
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-3.jpg" src="" alt="Comparison Image 3"></div>
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-4.jpg" src="" alt="Comparison Image 4"></div>
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-5.jpg" src="" alt="Comparison Image 5"></div>
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-6.jpg" src="" alt="Comparison Image 6"></div>
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-7.jpg" src="" alt="Comparison Image 7"></div>
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-8.jpg" src="" alt="Comparison Image 8"></div>
+              <div class="carousel-image-slide"><img id="veridate-high-fi-comparison-9.jpg" src="" alt="Comparison Image 9"></div>
+            </div>
+            <button class="carousel-button prev">❮</button>
+            <button class="carousel-button next">❯</button>
+            <div class="carousel-dots"></div>
           </div>
-          <button class="carousel-button prev">❮</button>
-          <button class="carousel-button next">❯</button>
-          <div class="carousel-dots"></div>
-        </div>
+
+        </ul>
       </div>
 
       <div class="ux-process-step">
-        <h3 class="font-semibold text-lg text-[#118AB2]">Accessibility</h3>
+        <h3 class="font-bold text-2xl text-[#118AB2]">Accessibility</h3>
         <p class="ml-6">Considerations for inclusive design, ensuring the app is usable by individuals with diverse abilities (e.g., highly readable typography, strong color contrast, large buttons, centered elements for left/right-handed users).</p>
-        <!-- Carousel for Accessibility -->
-        <div class="carousel-container" id="carousel-accessibility">
-          <div class="carousel-images-wrapper">
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/06D6A0/white?text=Accessibility+1" alt="Accessibility Image 1"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/118AB2/white?text=Accessibility+2" alt="Accessibility Image 2"></div>
-            <div class="carousel-image-slide"><img src="https://placehold.co/600x300/073B4C/white?text=Accessibility+3" alt="Accessibility Image 3"></div>
-          </div>
-          <button class="carousel-button prev">❮</button>
-          <button class="carousel-button next">❯</button>
-          <div class="carousel-dots"></div>
-        </div>
+        <img id="veridate-accessibility-considerations.jpg" src="" alt="accessibility" class="w-full h-auto object-cover rounded-lg">
       </div>
+
     </div>
   </section>
 </div>
@@ -418,7 +433,7 @@
     initializeCarousel('carousel-define');
     initializeCarousel('carousel-ideate');
     initializeCarousel('carousel-prototype');
-    initializeCarousel('carousel-accessibility');
+    initializeCarousel('carousel-high-fi-comparison');
 
     updateImageSrc('veridate-empathy-map-ml.jpg');
     updateImageSrc('veridate-empathy-map-am.jpg');
@@ -433,7 +448,29 @@
     updateImageSrc('veridate-user-journey-map-antonia.jpg');
     updateImageSrc('veridate-user-journey-map-catalin.jpg');
     updateImageSrc('veridate-user-journey-map-lars.jpg');
-
+    updateImageSrc('veridate-hypothesis-statements-1.jpg');
+    updateImageSrc('veridate-hypothesis-statements-2.jpg');
+    updateImageSrc('veridate-hypothesis-statements-3.jpg');
+    updateImageSrc('veridate-problem-statements-1.jpg');
+    updateImageSrc('veridate-problem-statements-2.jpg');
+    updateImageSrc('veridate-problem-statements-3.jpg');
+    updateImageSrc('veridate-value-propositions.jpg');
+    updateImageSrc('veridate-information-architecture.png');
+    updateImageSrc('veridate-paper-wireframe-1.jpg');
+    updateImageSrc('veridate-paper-wireframe-2.jpg');
+    updateImageSrc('veridate-affinity-diagram-1.png');
+    updateImageSrc('veridate-affinity-diagram-2.png');
+    updateImageSrc('veridate-affinity-diagram-3.png');
+    updateImageSrc('veridate-accessibility-considerations.jpg');
+    updateImageSrc('veridate-high-fi-comparison-1.jpg');
+    updateImageSrc('veridate-high-fi-comparison-2.jpg');
+    updateImageSrc('veridate-high-fi-comparison-3.jpg');
+    updateImageSrc('veridate-high-fi-comparison-4.jpg');
+    updateImageSrc('veridate-high-fi-comparison-5.jpg');
+    updateImageSrc('veridate-high-fi-comparison-6.jpg');
+    updateImageSrc('veridate-high-fi-comparison-7.jpg');
+    updateImageSrc('veridate-high-fi-comparison-8.jpg');
+    updateImageSrc('veridate-high-fi-comparison-9.jpg');
   });
 </script>
 
