@@ -104,21 +104,23 @@
         object-fit: contain; /* Ensures image fits without cropping, maintaining aspect ratio */
         border-radius: 0.5rem;
     }
-    .carousel-button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        padding: 1rem 1rem;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        z-index: 10;
-        transition: background-color 0.3s ease;
-        border: none;
+
+   .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(31, 41, 55, 0.5); /* tailwind bg-gray-800 @ 50% */
+      color: #fff;
+      padding: 1rem;              /* p-4 */
+      border-radius: 9999px;      /* rounded-full */
+      z-index: 10;
+      border: 2px solid #fff;
+      outline: none;              /* focus:outline-none */
+      transition: background-color 0.3s ease;
+      cursor: pointer;
     }
     .carousel-button:hover {
-        background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(31, 41, 55, 0.75); /* hover:bg-opacity-75 */
     }
     .carousel-button.prev {
         left: 0.5rem;
