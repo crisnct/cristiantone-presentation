@@ -417,7 +417,7 @@
         data: {
             labels: ['Desktop Applications', 'Web Backends'],
             datasets: [{
-                data: [80, 20],
+                data: [15, 4.4],
                 backgroundColor: [colors.blue, colors.green],
                 hoverOffset: 30
             }]
@@ -426,10 +426,17 @@
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                ...tooltipCallback.plugins,
                 legend: {
                     position: 'bottom',
                     labels: { font: chartFont }
+                },
+                tooltip: {
+                  callbacks: {
+                      // Custom callback to display percentage based on our customTotal
+                      label: function(context) {
+                          return `${context.parsed} years`;
+                      }
+                  }
                 }
             }
         }
@@ -441,7 +448,7 @@
         data: {
             labels: ['Logistics', 'Automotive', 'Healthcare', 'Gaming'],
             datasets: [{
-                data: [45, 30, 10, 15],
+                data: [10.4, 5, 0.6, 1.4],
                 backgroundColor: [colors.blue, colors.green, colors.yellow, colors.red],
                 hoverOffset: 30
             }]
@@ -450,7 +457,6 @@
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                ...tooltipCallback.plugins,
                 legend: {
                     position: 'bottom',
                     labels: {
@@ -459,6 +465,14 @@
                         textAlign: 'center',
                         padding: 10
                     }
+                },
+                 tooltip: {
+                  callbacks: {
+                      // Custom callback to display percentage based on our customTotal
+                      label: function(context) {
+                          return `${context.parsed} years`;
+                      }
+                  }
                 }
             }
         }
