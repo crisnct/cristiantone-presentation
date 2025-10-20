@@ -361,54 +361,72 @@
         }
     });
 
-    const techSkillsCtx = document.getElementById('techSkillsChart').getContext('2d');
+        const techSkillsCtx = document.getElementById('techSkillsChart').getContext('2d');
+      // Original skills + years
+    const techSkillEntries = [
+      { label: 'Java 7-25', value: 16 },
+      { label: 'SWT & Eclipse RCP', value: 15 },
+      { label: 'Spring Boot & REST API & JPA', value: 5 },
+      { label: 'PostgreSQL', value: 3 },
+      { label: 'Amazon S3', value: 2 },
+      { label: 'Kubernetes & Docker', value: 2 },
+      { label: 'Jenkins CI/CD', value: 2 },
+      { label: 'JUnit 5 & Mockito', value: 2 },
+      { label: 'GCP & Kafka & ActiveMQ', value: 1 }
+    ];
+
+    // Expand any "&"‑separated labels so each becomes its own entry
+    const expandedTechSkills = techSkillEntries.flatMap(({ label, value }) =>
+      label.split('&').map(part => ({
+        label: part.trim(),
+        value
+      }))
+    );
+
+    // Final arrays for Chart.js
+    const labels = expandedTechSkills.map(item => wrapLabel(item.label));
+    const data = expandedTechSkills.map(item => item.value);
+
+    // Reuse your palette cyclically
+    const palette = [colors.blue, colors.green, colors.yellow, colors.red, colors.navy];
+    const backgroundColor = expandedTechSkills.map((_, idx) => palette[idx % palette.length]);
+
     new Chart(techSkillsCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Java 7-25',
-                     'SWT & Eclipse RCP',
-                     'Spring Boot & REST API & JPA',
-                     'PostgreSQL',
-                     'Amazon S3',
-                     'Kubernetes & Docker',
-                     'Jenkins CI/CD',
-                     'JUnit 5 & Mockito',
-                     'GCP & Kafka & ActiveMQ'
-                     ].map(wrapLabel),
-            datasets: [{
-                label: 'Years of Experience',
-                data: [16, 15, 5, 3, 2, 2, 2, 2, 1],
-                backgroundColor: [colors.blue, colors.green, colors.yellow, colors.red, colors.navy],
-                borderColor: 'rgba(255, 255, 255, 0)',
-                borderWidth: 3
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                     title: {
-                        display: true,
-                        text: 'Years of Experience'
-                    },
-                    grid: { display: true },
-                    ticks: { font: chartFont },
-                    beginAtZero: true
-                },
-                y: {
-                    grid: { display: false },
-                    ticks: { font: chartFont, padding: 10 }
-                }
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Years of Experience',
+          data,
+          backgroundColor,
+          borderColor: 'rgba(255, 255, 255, 0)',
+          borderWidth: 3
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Years of Experience'
             },
-            plugins: {
-                ...tooltipCallback.plugins,
-                legend: {
-                    display: false
-                }
-            }
+            grid: { display: true },
+            ticks: { font: chartFont },
+            beginAtZero: true
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: chartFont, padding: 10 }
+          }
+        },
+        plugins: {
+          ...tooltipCallback.plugins,
+          legend: { display: false }
         }
+      }
     });
 
     const appTypeCtx = document.getElementById('appTypeChart').getContext('2d');
