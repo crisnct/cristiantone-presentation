@@ -1,0 +1,9 @@
+.git
+.idea
+node_modules
+build
+.react-router
+artifacts
+test-results
+playwright-report
+.env*
