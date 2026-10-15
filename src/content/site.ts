@@ -8,7 +8,8 @@ export const site = {
   statement:
     "I build high-quality software through clean architecture, rigorous code reviews, human-centered leadership, and clean, maintainable code.",
   origin: deployment.origin,
-  base: deployment.base,
+  base: import.meta.env?.VITE_APP_BASE ?? deployment.base,
+  publicBase: deployment.base,
   cv: "documents/cristian-tone-dev-resume.pdf",
   linkedin: "https://www.linkedin.com/in/ctone/",
   github: "https://github.com/crisnct",
@@ -16,7 +17,8 @@ export const site = {
 
 export const assetUrl = (path: string) =>
   `${site.base}/${path.replace(/^\/+/, "")}`;
-export const pageUrl = (path = "/") => `${site.origin}${site.base}${path}`;
+export const pageUrl = (path = "/") =>
+  `${site.origin}${site.publicBase}${path}`;
 export const navigation = [
   { label: "Home", to: "/" },
   { label: "Hire Me", to: "/hire-me" },

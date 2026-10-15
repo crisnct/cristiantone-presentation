@@ -1,4 +1,4 @@
-import { assetUrl, pageUrl, site } from "./site";
+import { pageUrl, site } from "./site";
 import { branding } from "./migrated";
 export function pageMeta(title: string, description: string, path: string) {
   const fullTitle =
@@ -15,7 +15,7 @@ export function pageMeta(title: string, description: string, path: string) {
     { property: "og:type", content: "website" },
     {
       property: "og:image",
-      content: `${site.origin}${assetUrl(branding.portrait)}`,
+      content: pageUrl(`/${branding.portrait}`),
     },
     { name: "twitter:card", content: "summary_large_image" },
   ];

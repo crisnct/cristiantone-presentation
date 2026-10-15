@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "react-router dev --host 127.0.0.1",
-    "build": "react-router build && node scripts/finalize-build.mjs",
+    "build": "node scripts/build.mjs",
     "typecheck": "react-router typegen && tsc --noEmit",
     "lint": "eslint src tests scripts *.ts *.mjs",
     "test": "vitest run",

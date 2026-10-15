@@ -18,11 +18,10 @@ const types = {
   ".data": "text/x-script",
 };
 const aliases = {
-  "/cristiantone": "/cristiantone/",
-  "/cristiantone/home": "/cristiantone/",
-  "/cristiantone/home/": "/cristiantone/",
-  "/cristiantone/portfolio": "/cristiantone/projects",
-  "/cristiantone/portfolio/": "/cristiantone/projects",
+  "/home": "/",
+  "/home/": "/",
+  "/portfolio": "/projects",
+  "/portfolio/": "/projects",
 };
 http
   .createServer(async (request, response) => {
@@ -37,7 +36,7 @@ http
       }
       const name = decodeURIComponent(url.pathname);
       let file = path.resolve(root, `.${name}`);
-      if (!file.startsWith(root + path.sep)) {
+      if (file !== root && !file.startsWith(root + path.sep)) {
         response.writeHead(404);
         response.end();
         return;
@@ -56,9 +55,7 @@ http
         response.end(await fs.readFile(file));
       } catch {
         response.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
-        response.end(
-          await fs.readFile(path.join(root, "cristiantone/404.html")),
-        );
+        response.end(await fs.readFile(path.join(root, "404.html")));
       }
     } catch {
       response.writeHead(400);
@@ -66,5 +63,5 @@ http
     }
   })
   .listen(port, "127.0.0.1", () =>
-    console.log(`Static preview: http://127.0.0.1:${port}/cristiantone/`),
+    console.log(`Static preview: http://127.0.0.1:${port}/`),
   );

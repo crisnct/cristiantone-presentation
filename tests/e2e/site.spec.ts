@@ -2,7 +2,9 @@ import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import fs from "node:fs/promises";
 import { site } from "../../src/content/site";
-const prefix = "/cristiantone";
+const prefix =
+  process.env.E2E_PATH_PREFIX ??
+  (process.env.E2E_BASE_URL?.startsWith(site.origin) ? site.publicBase : "");
 const paths = [
   "/",
   "/hire-me",
@@ -89,11 +91,11 @@ test("all pre-rendered routes work directly and after refresh", async ({
     }
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      `${site.origin}${prefix}${path}`,
+      `${site.origin}${site.publicBase}${path}`,
     );
     await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
       "content",
-      `${site.origin}${prefix}${path}`,
+      `${site.origin}${site.publicBase}${path}`,
     );
     await expect
       .poll(() =>
@@ -194,16 +196,23 @@ test("disclosure, gallery keyboard and certificate viewer", async ({
   await expect(page.locator("dialog[open]")).toHaveCount(0);
 });
 test("real 404 responses, aliases and local CV", async ({ request }) => {
+  if (prefix) {
+    const root = await request.get("/", { maxRedirects: 0 });
+    expect(root.status()).toBe(404);
+    expect(await root.text()).not.toContain("Career at a Glance");
+  }
   const sitemap = await request.get(prefix + "/sitemap.xml");
   expect(sitemap.status()).toBe(200);
   const sitemapText = await sitemap.text();
   for (const path of paths) {
-    expect(sitemapText).toContain(`<loc>${site.origin}${prefix}${path}</loc>`);
+    expect(sitemapText).toContain(
+      `<loc>${site.origin}${site.publicBase}${path}</loc>`,
+    );
   }
   const robots = await request.get(prefix + "/robots.txt");
   expect(robots.status()).toBe(200);
   expect(await robots.text()).toContain(
-    `Sitemap: ${site.origin}${prefix}/sitemap.xml`,
+    `Sitemap: ${site.origin}${site.publicBase}/sitemap.xml`,
   );
   for (const path of [
     "/missing-page",
@@ -211,14 +220,11 @@ test("real 404 responses, aliases and local CV", async ({ request }) => {
     "/images/missing.png",
   ])
     expect((await request.get(prefix + path)).status()).toBe(404);
-  expect(
-    (await request.get(prefix + "?test=1", { maxRedirects: 0 })).headers()
-      .location,
-  ).toBe(prefix + "/?test=1");
+  expect((await request.get(prefix + "/?test=1")).status()).toBe(200);
   expect(
     (await request.get(prefix + "/home?test=1", { maxRedirects: 0 })).headers()
       .location,
-  ).toBe(prefix + "/?test=1");
+  ).toBe(`${prefix}/?test=1`);
   expect(
     (await request.get(prefix + "/portfolio", { maxRedirects: 0 })).status(),
   ).toBe(308);

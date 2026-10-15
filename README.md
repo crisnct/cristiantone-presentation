@@ -66,7 +66,7 @@ npm ci
 npm run dev
 ```
 
-Open **[localhost:5173/cristiantone/](http://127.0.0.1:5173/cristiantone/)**.
+Open **[localhost:5173/cristiantone/](http://127.0.0.1:5173/cristiantone/)**. Development uses the public path; the production build also includes the local variant at `/`.
 
 To preview the built static site:
 
@@ -75,7 +75,7 @@ npm run build
 npm run preview
 ```
 
-Open **[localhost:8082/cristiantone/](http://127.0.0.1:8082/cristiantone/)**. If port `8082` is occupied, set `$env:PORT = '8083'` before starting the preview.
+Open **[localhost:8082/](http://127.0.0.1:8082/)**. If port `8082` is occupied, set `$env:PORT = '8083'` before starting the preview.
 
 ## ✓ Quality and verification
 
@@ -155,13 +155,13 @@ The public origin and path prefix are maintained in [`src/content/deployment.jso
 
 Rebuild after changing content or assets. Experience values are maintained editorially and are not recalculated automatically.
 
-Use `assetUrl()` for images and documents, and React Router for internal navigation. The application is hosted under **`/cristiantone/`**. Keep site assets local; auxiliary links to GitHub, LinkedIn, Figma, forms, and Google Docs can remain external. Search normalizes case and diacritics and uses the same typed content as the pages.
+Use `assetUrl()` for images and documents, and React Router for internal navigation. The public application is hosted under **`/cristiantone/`**; direct local access uses **`/`**. Keep site assets local; auxiliary links to GitHub, LinkedIn, Figma, forms, and Google Docs can remain external. Search normalizes case and diacritics and uses the same typed content as the pages.
 
 ---
 
 ## ▸ Deployment and operations
 
-The build uses `ssr: false` and `prerender: true`, then places the published site in `build/client/cristiantone/`. The final container contains static files and Nginx. Node.js is used during the build.
+The build uses `ssr: false` and `prerender: true`, then generates the local site in `build/client/` and the public variant in its `cristiantone/` folder. Both variants come from the same source and use the appropriate navigation and asset base. The final container contains static files and Nginx. Node.js is used during the build.
 
 <details>
 <summary><strong>Docker · start and inspect the container</strong></summary>
@@ -174,7 +174,7 @@ docker compose ps
 docker compose logs --tail 30 web
 ```
 
-The portfolio is available at `http://127.0.0.1:8082/cristiantone/`. To use another host port:
+The portfolio is available at `http://127.0.0.1:8082/`. To use another host port:
 
 ```powershell
 $env:WEB_PORT = '8083'
@@ -202,15 +202,15 @@ $env:E2E_BASE_URL = 'https://cristiantone.taila68086.ts.net'
 npm run test:e2e
 ```
 
-The script checks the connected node, configured hostname, local health, and built metadata, snapshots the existing Tailscale configuration under `artifacts/`, and publishes only `/cristiantone`. It verifies public access and preserves existing handlers, including `/medicina`. If verification fails after adding a new handler, it removes only that handler.
+The script checks the connected node, configured hostname, local health, and built metadata, snapshots the existing Tailscale configuration under `artifacts/`, and publishes the portfolio only at `/cristiantone`. It removes a root handler only when that handler points to this same portfolio target. It verifies public access and preserves existing handlers, including `/medicina`. If verification fails after adding a new handler, it removes only that handler.
 
 The configured route is:
 
 ```text
-HTTPS /cristiantone → http://127.0.0.1:8082/cristiantone
+HTTPS /cristiantone → http://127.0.0.1:8082
 ```
 
-The target includes the prefix because Funnel removes the mount path before forwarding. For another local port, set `WEB_PORT` when starting Compose and pass the same value with `./scripts/install-tailscale.ps1 -LocalPort 8083`.
+Funnel strips `/cristiantone` before forwarding. Nginx uses the Tailscale forwarded hostname to serve the public `cristiantone/` folder, while direct local requests use the local variant at `/`. Public navigation and assets retain `/cristiantone`, and the proxy target has no path suffix. For another local port, set `WEB_PORT` when starting Compose and pass the same value with `./scripts/install-tailscale.ps1 -LocalPort 8083`.
 
 Funnel runs with `--bg`, so its configuration persists across Tailscale restarts and device reboots. Docker Desktop and Tailscale must be running. Check routing with:
 
@@ -218,7 +218,7 @@ Funnel runs with `--bg`, so its configuration persists across Tailscale restarts
 & 'C:\Program Files\Tailscale\tailscale.exe' funnel status
 ```
 
-See the [official Funnel CLI documentation](https://tailscale.com/docs/reference/tailscale-cli/funnel) for prerequisites, HTTPS, and persistence. The portfolio no longer depends on the JobsHunter reverse proxy or its tunnel. The old portfolio proxy location redirects to the new public address; other JobsHunter services retain their existing configuration.
+See the [official Funnel CLI documentation](https://tailscale.com/docs/reference/tailscale-cli/funnel) for prerequisites, HTTPS, and persistence. The portfolio no longer depends on the JobsHunter reverse proxy or its tunnel. The old portfolio proxy location redirects to the new public address and preserves the public prefix; other JobsHunter services retain their existing configuration.
 
 </details>
 
