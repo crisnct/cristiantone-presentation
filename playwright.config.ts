@@ -8,7 +8,6 @@ export default defineConfig({
   use: {
     baseURL: process.env.E2E_BASE_URL || "http://127.0.0.1:8082",
     trace: "retain-on-failure",
-    extraHTTPHeaders: { "ngrok-skip-browser-warning": "true" },
   },
   projects: [
     { name: "desktop", use: { viewport: { width: 1440, height: 1000 } } },

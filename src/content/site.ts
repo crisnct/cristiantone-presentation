@@ -1,3 +1,5 @@
+import deployment from "./deployment.json" with { type: "json" };
+
 export const site = {
   name: "Nelu-Cristian Țone",
   shortName: "Cristian Țone",
@@ -5,8 +7,8 @@ export const site = {
   email: "nelucristian2005@gmail.com",
   statement:
     "I build high-quality software through clean architecture, rigorous code reviews, human-centered leadership, and clean, maintainable code.",
-  origin: "https://ronin-archesporial-lonnie.ngrok-free.dev",
-  base: "/cristiantone",
+  origin: deployment.origin,
+  base: deployment.base,
   cv: "documents/cristian-tone-dev-resume.pdf",
   linkedin: "https://www.linkedin.com/in/ctone/",
   github: "https://github.com/crisnct",

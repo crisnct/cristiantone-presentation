@@ -8,7 +8,7 @@ Clean architecture · Thoughtful code reviews · Human-centered leadership
 
 A personal portfolio connecting my engineering experience, selected projects, and the person behind the code.
 
-**[Explore the portfolio ↗](https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/)** · **[View my résumé](public/documents/cristian-tone-dev-resume.pdf)** · **[Connect on LinkedIn](https://www.linkedin.com/in/ctone/)**
+**[Explore the portfolio ↗](https://cristiantone.taila68086.ts.net/cristiantone/)** · **[View my résumé](public/documents/cristian-tone-dev-resume.pdf)** · **[Connect on LinkedIn](https://www.linkedin.com/in/ctone/)**
 
 [![React](docs/assets/react.svg)](package.json)
 [![TypeScript](docs/assets/typescript.svg)](tsconfig.json)
@@ -30,13 +30,13 @@ The portfolio brings together technical experience, leadership, project case stu
 
 | Explore                                                                                     | What you will find                                                     |
 | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------- |
-| [Career overview](https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/)           | Experience, technical proficiency, competencies, and industry exposure |
-| [Selected projects](https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/projects) | Metal Investment, JobsHunter, Simple Contacts, SnowSWT, and VeriDate   |
-| [Certificates](https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/certificates)  | Nine original certificates with an image viewer                        |
-| [About me](https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/about)             | The personal side of my professional journey                           |
-| [Work with me](https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/hire-me)       | Professional profile, contact options, and résumé                      |
+| [Career overview](https://cristiantone.taila68086.ts.net/cristiantone/)           | Experience, technical proficiency, competencies, and industry exposure |
+| [Selected projects](https://cristiantone.taila68086.ts.net/cristiantone/projects) | Metal Investment, JobsHunter, Simple Contacts, SnowSWT, and VeriDate   |
+| [Certificates](https://cristiantone.taila68086.ts.net/cristiantone/certificates)  | Nine original certificates with an image viewer                        |
+| [About me](https://cristiantone.taila68086.ts.net/cristiantone/about)             | The personal side of my professional journey                           |
+| [Work with me](https://cristiantone.taila68086.ts.net/cristiantone/hire-me)       | Professional profile, contact options, and résumé                      |
 
-> **Demo access:** the current public address uses ngrok. On your first visit, you may see a “Visit Site” confirmation before the portfolio opens.
+> **Demo access:** the portfolio is published over HTTPS through Tailscale Funnel and is accessible without a Tailscale account.
 
 ## ◇ Engineering behind the experience
 
@@ -121,6 +121,8 @@ Generated screenshots and audit outputs live in `artifacts/`; the HTML test repo
 
 The [migration and verification report](docs/migration-verification.md) records the checks performed during implementation on **10 October 2026**. It is a dated record, rather than a live CI status.
 
+The [Tailscale migration report](docs/tailscale-migration.md) records the deployment and public checks performed on **15 October 2026**.
+
 </details>
 
 ## ◇ Find your way around the code
@@ -137,8 +139,7 @@ cristiantone-presentation/
 │   ├── images/          Photographs, logos, galleries, and certificates
 │   └── documents/       Original résumé PDF
 ├── tests/               Unit, interaction, and browser tests
-├── scripts/             Build finalization, preview, and proxy utilities
-├── infrastructure/      Integration with the existing reverse proxy
+├── scripts/             Build finalization, preview, and Tailscale publishing
 └── docs/                Implementation and verification notes
 ```
 
@@ -146,9 +147,11 @@ cristiantone-presentation/
 | :-------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | Text, experience, projects, certificates, and their order | [`src/content/migrated.ts`](src/content/migrated.ts)                                                                      |
 | Technical proficiency and chart values                    | [`src/content/skills.ts`](src/content/skills.ts)                                                                          |
-| Profile, contact links, public origin, and URL helpers    | [`src/content/site.ts`](src/content/site.ts)                                                                              |
+| Profile, contact links, and URL helpers                   | [`src/content/site.ts`](src/content/site.ts)                                                                              |
 | Header portrait                                           | [`public/images/cristian-tone-portrait.png`](public/images/cristian-tone-portrait.png), referenced by `branding.portrait` |
 | Downloadable résumé                                       | [`public/documents/cristian-tone-dev-resume.pdf`](public/documents/cristian-tone-dev-resume.pdf)                          |
+
+The public origin and path prefix are maintained in [`src/content/deployment.json`](src/content/deployment.json), shared by page metadata, sitemap/robots generation, and the publishing script.
 
 Rebuild after changing content or assets. Experience values are maintained editorially and are not recalculated automatically.
 
@@ -163,7 +166,7 @@ The build uses `ssr: false` and `prerender: true`, then places the published sit
 <details>
 <summary><strong>Docker · start and inspect the container</strong></summary>
 
-The Compose configuration connects to the existing external Docker network **`jobshunter-net`**, which must be available before startup.
+The Compose configuration uses its own Docker network and binds the portfolio to loopback on port **8082**. Tailscale runs on the Windows host; no external Docker network is required.
 
 ```powershell
 docker compose up -d --build
@@ -185,43 +188,50 @@ Nginx serves generated routes through `try_files $uri $uri/index.html =404`. `/h
 </details>
 
 <details>
-<summary><strong>Reverse proxy · publish and verify</strong></summary>
+<summary><strong>Tailscale Funnel · publish and verify</strong></summary>
 
-The current environment uses the existing ngrok tunnel and `jobshunter-nginx:8080`. The portfolio proxy block is maintained in [`infrastructure/proxy-location.conf`](infrastructure/proxy-location.conf); the installation script updates `D:\Workspace\jobshunter\nginx.conf`.
+Public URL: **[cristiantone.taila68086.ts.net/cristiantone/](https://cristiantone.taila68086.ts.net/cristiantone/)**.
 
-Run in this order, after installing the Playwright browser:
+Install Tailscale on Windows, sign in, and ensure Funnel is enabled for this node. The installer uses `tailscale` from PATH or `C:\Program Files\Tailscale\tailscale.exe`. Run PowerShell 7:
 
 ```powershell
 npm run check
-docker compose up -d --build
+docker compose up -d --build --wait
+./scripts/install-tailscale.ps1
+$env:E2E_BASE_URL = 'https://cristiantone.taila68086.ts.net'
 npm run test:e2e
-node scripts/proxy-smoke.mjs artifacts/proxy-before.json
-./scripts/install-proxy.ps1
-node scripts/proxy-smoke.mjs artifacts/proxy-after.json artifacts/proxy-before.json
 ```
 
-The installer checks container health, captures existing route behavior, backs up the proxy configuration, inserts the portfolio block, validates with `nginx -t`, reloads Nginx, and verifies both local proxy and public access. It then checks existing routes for regressions. On failure, it restores the configuration and reloads the proxy.
+The script checks the connected node, configured hostname, local health, and built metadata, snapshots the existing Tailscale configuration under `artifacts/`, and publishes only `/cristiantone`. It verifies public access and preserves existing handlers, including `/medicina`. If verification fails after adding a new handler, it removes only that handler.
 
-For a different local port, use `./scripts/install-proxy.ps1 -LocalPort 8083`. Backups are written beside the JobsHunter configuration as `nginx.conf.backup-YYYYMMdd-HHmmss`.
+The configured route is:
 
-The proxy resolves the portfolio container through Docker DNS (`127.0.0.11`) with a ten-second cache, allowing container recreation. Regression checks compare status codes, upstream routing, content types, and OAuth metadata against the baseline, without issuing tokens or performing authenticated operations.
+```text
+HTTPS /cristiantone → http://127.0.0.1:8082/cristiantone
+```
 
-**Public hosting:** the ngrok response was observed to include `X-Robots-Tag: noindex, nofollow` during implementation. This limits search indexing despite the site's canonical metadata and generated sitemap. Browser tests send `ngrok-skip-browser-warning`. When moving to a production domain, update `site.origin` and hosting configuration, including the domain used for the sitemap and robots file in `scripts/finalize-build.mjs`.
+The target includes the prefix because Funnel removes the mount path before forwarding. For another local port, set `WEB_PORT` when starting Compose and pass the same value with `./scripts/install-tailscale.ps1 -LocalPort 8083`.
+
+Funnel runs with `--bg`, so its configuration persists across Tailscale restarts and device reboots. Docker Desktop and Tailscale must be running. Check routing with:
+
+```powershell
+& 'C:\Program Files\Tailscale\tailscale.exe' funnel status
+```
+
+See the [official Funnel CLI documentation](https://tailscale.com/docs/reference/tailscale-cli/funnel) for prerequisites, HTTPS, and persistence. The portfolio no longer depends on the JobsHunter reverse proxy or its tunnel. The old portfolio proxy location redirects to the new public address; other JobsHunter services retain their existing configuration.
 
 </details>
 
 <details>
 <summary><strong>Rollback · restore the previous configuration or image</strong></summary>
 
-Use the actual backup filename printed by the installer:
+To unpublish only the portfolio while preserving other Funnel handlers:
 
 ```powershell
-Copy-Item -LiteralPath 'D:\Workspace\jobshunter\nginx.conf.backup-YYYYMMdd-HHmmss' -Destination 'D:\Workspace\jobshunter\nginx.conf' -Force
-docker exec jobshunter-nginx nginx -t
-docker exec jobshunter-nginx nginx -s reload
+& 'C:\Program Files\Tailscale\tailscale.exe' funnel --https=443 --set-path=/cristiantone off
 ```
 
-Only reload after configuration validation succeeds.
+Run `./scripts/install-tailscale.ps1` again to republish. Avoid `funnel reset`, which clears shared routing. Configuration snapshots are saved in `artifacts/tailscale-before-*.json` for inspection.
 
 Before rebuilding the image, preserve the currently deployed version:
 

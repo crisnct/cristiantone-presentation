@@ -1,5 +1,7 @@
 # Verificarea migrării — 10 octombrie 2026
 
+> Raport istoric al migrării la React. Publicarea a fost mutată pe Tailscale la 15 octombrie 2026; configurația curentă și verificările sunt în [raportul Tailscale](tailscale-migration.md).
+
 Public: https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/
 
 ## Rezultatul implementat

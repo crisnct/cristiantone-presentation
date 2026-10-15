@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { load } from "cheerio";
+import deployment from "../src/content/deployment.json" with { type: "json" };
 const root = path.resolve("build/client");
 const routes = [
   "",
@@ -54,11 +55,11 @@ const missing =
 await fs.writeFile(path.join(published, "404.html"), missing);
 await fs.writeFile(
   path.join(published, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map((route) => `<url><loc>https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/${route}</loc></url>`).join("")}</urlset>`,
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map((route) => `<url><loc>${deployment.origin}${deployment.base}/${route}</loc></url>`).join("")}</urlset>`,
 );
 await fs.writeFile(
   path.join(published, "robots.txt"),
-  "User-agent: *\nAllow: /cristiantone/\nSitemap: https://ronin-archesporial-lonnie.ngrok-free.dev/cristiantone/sitemap.xml\n",
+  `User-agent: *\nAllow: ${deployment.base}/\nSitemap: ${deployment.origin}${deployment.base}/sitemap.xml\n`,
 );
 console.log(
   `Validated ${routes.length} pre-rendered pages and their local assets.`,
